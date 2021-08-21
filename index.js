@@ -1,24 +1,14 @@
-function common() {
-  console.log(1);
-  setTimeout(function () {
-    console.log(2);
-  }, 1000);
-  console.log(3);
-}
-// common();
+(function () {
+  return console.log(10);
+})();
 
-function callback() {
-  console.log(1);
-  function call(cd) {
-    setTimeout(function () {
-      console.log(2);
-      cd();
-    }, 1000);
-  }
-  function back() {
-    console.log(3);
-  }
-  call(back);
+function args(...args) {
+  args.map((arg) => console.log(arg));
 }
 
-callback();
+function* gen() {
+  yield console.log("1번째 지점");
+  yield console.log("2번째 지점");
+  yield console.log("3번째 지점");
+  return console.log("4번째 지점 리턴");
+}
