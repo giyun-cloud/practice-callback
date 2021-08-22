@@ -1,14 +1,11 @@
-(function () {
-  return console.log(10);
-})();
+const obj = Object.create(null, {
+  name: {
+    value: "Gyn",
+    writable: false,
+    configurable: false,
+  },
+});
 
-function args(...args) {
-  args.map((arg) => console.log(arg));
-}
-
-function* gen() {
-  yield console.log("1번째 지점");
-  yield console.log("2번째 지점");
-  yield console.log("3번째 지점");
-  return console.log("4번째 지점 리턴");
-}
+obj.name = "a";
+delete obj.name;
+console.log(obj.name); // ojb.name은 a로바뀌지 않고 Gyn이라고뜸
