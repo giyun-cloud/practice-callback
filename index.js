@@ -1,11 +1,10 @@
-const obj = Object.create(null, {
-  name: {
-    value: "Gyn",
-    writable: false,
-    configurable: false,
-  },
-});
+function saleRate(rate) {
+  return function price(price) {
+    return price - price * rate * 0.01;
+  };
+}
 
-obj.name = "a";
-delete obj.name;
-console.log(obj.name); // ojb.name은 a로바뀌지 않고 Gyn이라고뜸
+const summerRate = saleRate(20);
+const winterRate = saleRate(25);
+
+console.log(summerRate(10000), winterRate(10000));
