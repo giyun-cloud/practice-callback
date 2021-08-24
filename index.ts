@@ -1,14 +1,7 @@
-type NameObj = {
-  name?: string;
-  age: number;
-}
+type Tuple = [string,string,number]
 
-const obj: NameObj = {
-  name: "abc",
-  age: 27
-}
+let tuple: Tuple = ["ab","ab",3]
 
-delete obj.name
-// delete obj.age
+let [a,b,c] = tuple
 
-console.log(obj.name)
+c = "ab"
