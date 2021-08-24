@@ -1,39 +1,24 @@
-function addOne() {
-  let result = 0;
-  return function add(add = 0) {
-    if (add) result += add;
-    else result++;
-    console.log(result);
-    return result;
-  };
-}
+const wei = [];
+const chok = [];
+const oh = ["손견", "손책", "손권"];
 
-for (let i = 0; i < 5; i++) {
-  addOne()();
-}
+wei.push("조조", "하후돈", "하후연");
+chok.push("유비", "관우", "장비");
+// oh.push("손견", "손책", "손권");
+console.log(chok);
 
-const result = addOne();
+wei.unshift("서황");
+chok.unshift("조운");
+// oh.unshift("주유");
 
-for (let i = 0; i < 5; i++) {
-  result();
-}
+console.log(wei.slice(1, 3));
+oh.splice(1, 1, "주유", "감녕");
+console.log(oh);
 
-result(5);
-result();
-console.log("🟢🟢🟢🟢🟢🟢🟢🟢");
-function* generatorAddOne() {
-  let i = 1;
-  while (true) {
-    console.log(i);
-    const add = yield i;
-    if (add) i += add;
-    else i++;
-  }
-}
+wei.shift();
 
-const genResult = generatorAddOne();
-for (let i = 0; i < 5; i++) {
-  genResult.next();
-}
-genResult.next(5);
-genResult.next();
+console.log(chok.join("  "));
+console.log(chok.join("  ").split("  "));
+
+console.log(chok.concat(oh));
+console.log([...oh, ...chok]);
