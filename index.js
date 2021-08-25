@@ -1,11 +1,25 @@
-function sumNumbers() {
-  return Array.from(arguments).reduce((a, b) => a + b, 0);
+const a1 = {
+  aa: "aa",
+};
+const a2 = {
+  bb: "bb",
+};
+const a3 = {
+  cc: "cc",
+};
+
+a1.__proto__ = a2;
+a2.__proto__ = a3;
+
+// console.log(a1.toString);
+// console.log(a1.cc);
+
+function Name(_name) {
+  this.name = _name;
 }
 
-console.log(sumNumbers(10, 20, 30, 40));
+Name.prototype.lastName = "Gyn";
 
-function sumNumbersArgs(...args) {
-  return args.reduce((a, b) => a + b, 0);
-}
+const gy = new Name("giyun");
 
-console.log(sumNumbersArgs(10, 20, 30, 40));
+console.log(gy.name, gy.lastName);
