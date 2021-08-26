@@ -1,7 +1,16 @@
-type Tuple = [string,string,number]
+type Obj = {
+  num: number;
+  str: string;
+}
 
-let tuple: Tuple = ["ab","ab",3]
+function func1<T>(params:T): T {
+  return params
+}
 
-let [a,b,c] = tuple
+func1({num:1,str:1})
+// func1<Obj>({num:1,str:1})
+func1<Obj>({num:1,str:"1"})
 
-c = "ab"
+const func2 = <T,B>(aa:T,bb:B):T => {
+  return aa
+}
