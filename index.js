@@ -1,25 +1,12 @@
-const a1 = {
-  aa: "aa",
-};
-const a2 = {
-  bb: "bb",
-};
-const a3 = {
-  cc: "cc",
-};
-
-a1.__proto__ = a2;
-a2.__proto__ = a3;
-
-// console.log(a1.toString);
-// console.log(a1.cc);
-
-function Name(_name) {
-  this.name = _name;
+function closure() {
+  let number = 1;
+  return function () {
+    return number++;
+  };
 }
 
-Name.prototype.lastName = "Gyn";
+const clo = closure();
 
-const gy = new Name("giyun");
-
-console.log(gy.name, gy.lastName);
+console.log(clo());
+console.log(clo());
+console.log(clo());
