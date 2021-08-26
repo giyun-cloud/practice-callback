@@ -1,19 +1,11 @@
-let myFirstPromise = new Promise((resolve, reject) => {
-  const random = Math.random();
-  console.log(random);
-  setTimeout(function () {
-    if (random >= 0.5) {
-      resolve("Success!");
-    } else {
-      reject("Fail");
-    }
-  }, 1000);
-});
+Array.prototype.myMap = function (cb) {
+  const ary = [];
 
-myFirstPromise
-  .then((successMessage) => {
-    console.log("Yay! " + successMessage);
-  })
-  .catch((failMessage) => {
-    console.log("Oops! " + failMessage);
-  });
+  for (let i = 0; i < this.length; i++) {
+    ary.push(cb(this[i], i, this));
+  }
+
+  return ary;
+};
+console.log([1, 2, 3].myMap((num) => num * num));
+console.log([1, 2, 3].map((num) => num * num));
