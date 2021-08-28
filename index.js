@@ -1,11 +1,12 @@
-Array.prototype.myMap = function (cb) {
-  const ary = [];
+const myIterable = {};
 
-  for (let i = 0; i < this.length; i++) {
-    ary.push(cb(this[i], i, this));
+myIterable[Symbol.iterator] = function* () {
+  let i = 1;
+  while (i <= 100) {
+    yield i++;
   }
-
-  return ary;
 };
-console.log([1, 2, 3].myMap((num) => num * num));
-console.log([1, 2, 3].map((num) => num * num));
+
+for (const n of myIterable) {
+  console.log(n);
+}
