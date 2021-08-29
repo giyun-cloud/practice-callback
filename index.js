@@ -1,29 +1,28 @@
-const obj = [
-  { a: 1, b: "B", c: "CCC" },
-  { a: 2, b: "B", c: "CCC" },
-  { a: 3, b: "B", c: "CCC" },
-];
+const sourceObj = {
+  a: 1,
+  b: 2,
+  c: 3,
+  d: 4,
+  e: 5,
+};
 
-const cart = [];
+const groupInfo = {
+  aGroup: ["a", "b"],
+  bGroup: ["c", "b", "e"],
+};
 
-for (const item of obj) {
-  const row = [];
+function makeGroup(source, info) {
+  const merge = (a, b) => ({ ...a, ...b });
 
-  for (const [, value] of Object.entries(item)) {
-    row.push(value);
-  }
-
-  cart.push(row);
+  const a = Object.keys(info);
+  return a
+    .map((group) => {
+      console.log({ [group]: info[group] });
+      return {
+        [group]: info[group].map((k) => ({ [k]: source[k] })).reduce(merge, {}),
+      };
+    })
+    .reduce(merge, {});
 }
 
-console.log(cart);
-console.log(cart.join("==="));
-
-const result = obj.map((obj) => {
-  console.log("첫번째 map넘어온 obj", obj);
-  const obj2 = Object.entries(obj);
-  console.log("entries한 obj", obj2);
-  return obj2.map(([, value]) => String(value));
-});
-console.log(result);
-console.log(result.join("==="));
+console.log(makeGroup(sourceObj, groupInfo));
