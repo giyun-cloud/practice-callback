@@ -1,28 +1,46 @@
-const sourceObj = {
-  a: 1,
-  b: 2,
-  c: 3,
-  d: 4,
-  e: 5,
-};
+const onepieceData = `Name,Role,Power
+Luffy,Captian,100
+Zoro,Subcaptian,95
+Sangi,Cooker,95
+Nami,Mate,50`;
 
-const groupInfo = {
-  aGroup: ["a", "b"],
-  bGroup: ["c", "b", "e"],
-};
+class MakeObj {
+  constructor(source, separater = ",") {
+    const rawData = source.split("\n");
 
-function makeGroup(source, info) {
-  const merge = (a, b) => ({ ...a, ...b });
+    this.headers = rawData[0].split(separater);
+    this.rows = rawData
+      .filter((_, index) => index > 0)
+      .map((row) => row.split(separater));
+  }
 
-  const a = Object.keys(info);
-  return a
-    .map((group) => {
-      console.log({ [group]: info[group] });
-      return {
-        [group]: info[group].map((k) => ({ [k]: source[k] })).reduce(merge, {}),
-      };
-    })
-    .reduce(merge, {});
+  row = (index) =>
+    this.rows[index].map((row, index) => [this.headers[index], row]);
+
+  get length() {
+    return this.rows.length;
+  }
+
+  get columnLength() {
+    return this.headers.length;
+  }
 }
 
-console.log(makeGroup(sourceObj, groupInfo));
+class MakeObj2 extends MakeObj {
+  make = () => {
+    let ary = [];
+    for (let i = 0; i < this.rows.length; i++) {
+      ary.push(this.row(i).reduce(
+        (a, [key, value]) => ({
+          ...a,
+          [key]: value,
+        }),
+        {},
+      ));
+    }
+    return ary
+  };
+}
+
+const data = new MakeObj2(onepieceData);
+console.log(data.make());
