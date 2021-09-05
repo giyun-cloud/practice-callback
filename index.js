@@ -1,35 +1,25 @@
-function deepCopyObj(obj) {
-  const copyObj = {};
-  for (const key in obj) {
-    if (typeof obj[key] == "object") {
-      copyObj[key] = deepCopyObj(obj[key]);
-    } else {
-      copyObj[key] = obj[key];
-    }
-  }
-  return copyObj;
+function div(strings, ...fns) {
+  const flat = (s) => s.split("\n").join("");
+
+  console.log(flat(strings[0]));
+  console.log(strings[0]);
+  console.log(flat(strings[1]));
+  console.log(strings[2]);
+  console.log(fns);
+
+  return function (props) {
+    return `<div style ="${
+      flat(strings[0]) + (fns[0] && fns[0](props) + flat(strings[1]))
+    }"</div>`;
+  };
 }
 
-const obj1 = {
-  a: {
-    b: {
-      d: 1,
-    },
-    c: 1,
-  },
-  aa: {
-    bb: {
-      dd: {
-        ff: 1,
-      },
-      gg: 5,
-    },
-  },
-};
+const Div = div`
+  font-size: 20px;
+  color: ${(props) => (props.active ? "white" : "gray")};
+  border: name;
+  color: ${(props) => (props.active ? "white" : "gray")};
+  border: name;
+`;
 
-const obj2 = {
-  a: {
-    b: 1,
-  },
-};
-deepCopyObj(obj2);
+console.log(Div({ active: true }));
